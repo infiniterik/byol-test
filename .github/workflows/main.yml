@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-grammar:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+          cache: 'pip'
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      - name: Run parsing test
+        run: |
+             for f in tests/*.txt
+               do
+                cat $f
+                echo "AST> "
+                pygrun parse calc.g4 prog $f
+                echo "---------------------"
+              done
+      - name: Run user code
+        run: python user.py
+      - name: Run full language tests
+        run: python run.py
