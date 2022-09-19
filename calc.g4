@@ -1,13 +1,11 @@
 grammar calc;
 
 prog : (expr NEWLINE)* ;
-expr : '(' content ')'
-     | content
+expr : INT OP INT
+     | num
+     | '(' expr ')'
      ;
-content : INT
-     | INT OP INT;
+num  : INT ;
 NEWLINE : [\r\n]+;
 INT  : [0-9]+ ;
 OP   : ( '+' | '-' | '*' | '/' ) ;
-fragment OPEN : '(';
-fragment CLOSE: ')';
