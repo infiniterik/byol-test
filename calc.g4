@@ -3,7 +3,7 @@ grammar calc;
 prog : (expr NEWLINE)* ;
 expr : INT OP INT
      | num
-     | OPEN expr CLOSE
+     | '(' expr ')'
      ;
 num  : INT ;
 NEWLINE : [\r\n]+;
