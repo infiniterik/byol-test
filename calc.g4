@@ -9,5 +9,5 @@ num  : INT ;
 NEWLINE : [\r\n]+;
 INT  : [0-9]+ ;
 OP   : ( '+' | '-' | 'x' | '/' ) ;
-OPEN : '('
-CLOSE: ')'
+OPEN : '(';
+CLOSE: ')';
