@@ -8,6 +8,6 @@ expr : INT OP INT
 num  : INT ;
 NEWLINE : [\r\n]+;
 INT  : [0-9]+ ;
-OP   : ( '+' | '-' | 'x' | '/' ) ;
+OP   : ( '+' | '-' | '*' | '/' ) ;
 OPEN : '(';
 CLOSE: ')';
