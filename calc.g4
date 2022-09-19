@@ -5,8 +5,7 @@ expr : content
      | '(' content ')'
      ;
 content : INT OP INT
-     | num;
-num  : INT ;
+     | INT;
 NEWLINE : [\r\n]+;
 INT  : [0-9]+ ;
 OP   : ( '+' | '-' | '*' | '/' ) ;
