@@ -28,7 +28,7 @@ jobs:
                do
                 cat $f
                 echo "AST> "
-                pygrun parse calc.g4 prog $f
+                antlr4-parse calc.g4 prog -tree $f
                 echo "---------------------"
               done
       - name: Run user code
