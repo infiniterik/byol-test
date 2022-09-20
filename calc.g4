@@ -6,7 +6,7 @@ expr : INT OP INT
      | '(' expr ')'
      ;
      
-assignment :  VARIABLE "=" expr;
+assignment :  VARIABLE '=' expr;
      
 num  : INT ;
 NEWLINE : [\r\n]+;
