@@ -13,4 +13,6 @@ num  : INT ;
 NEWLINE : [\r\n]+;
 INT  : [0-9]+ ;
 OP   : ( '+' | '-' | '*' | '/' ) ;
-VARIABLE : [a-zA-Z_][a-zA-Z0-9_]* ;
+VARIABLE : CHAR NCHAR* ;
+CHAR : [ぁ-んa-zA-Z_] ; 
+NCHAR : CHAR | INT ;
