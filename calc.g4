@@ -1,7 +1,7 @@
 grammar calc;
 
 prog : (stmt NEWLINE)* ;
-stmt : expr | assignment
+stmt : expr | assignment ;
 expr : INT OP INT
      | num
      | '(' expr ')'
