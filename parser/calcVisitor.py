@@ -1,74 +1,68 @@
-import sys
+# Generated from calc.g4 by ANTLR 4.11.1
 from antlr4 import *
-from parser.calcLexer import calcLexer
-from parser.calcParser import calcParser
-from parser.calcVisitor import calcVisitor
+if __name__ is not None and "." in __name__:
+    from .calcParser import calcParser
+else:
+    from calcParser import calcParser
 
-class CV(calcVisitor):
-    functions = {
-        "+": lambda x, y: x + y,
-        "-": lambda x, y: x - y,
-        "*": lambda x, y: x * y,
-        "/": lambda x, y: x / y,
-    }
+# This class defines a complete generic visitor for a parse tree produced by calcParser.
+
+class calcVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by calcParser#program.
     def visitProgram(self, ctx:calcParser.ProgramContext):
-        return [self.visit(x) for x in ctx.stmt()]
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by calcParser#expression.
     def visitExpression(self, ctx:calcParser.ExpressionContext):
-        return self.visit(ctx.expr())
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by calcParser#statement.
     def visitStatement(self, ctx:calcParser.StatementContext):
-        return self.visit(ctx.assignment())
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by calcParser#number.
     def visitNumber(self, ctx:calcParser.NumberContext):
-        return self.visit(ctx.num())
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by calcParser#paren.
     def visitParen(self, ctx:calcParser.ParenContext):
-        return self.visit(ctx.expr())
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by calcParser#addSub.
     def visitAddSub(self, ctx:calcParser.AddSubContext):
-        left_expression = self.visit(ctx.expr(0))
-        right_expression = self.visit(ctx.expr(1))
-        print("Debugging: ")
-        res = self.functions[ctx.A_OP().getText()](left_expression, right_expression)
-        return res
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by calcParser#mulDiv.
     def visitMulDiv(self, ctx:calcParser.MulDivContext):
-        res = self.functions[ctx.C_OP().getText()](self.visit(ctx.expr(0)), self.visit(ctx.expr(1)))
-        return res;
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by calcParser#assignment.
     def visitAssignment(self, ctx:calcParser.AssignmentContext):
         return self.visitChildren(ctx)
 
+
     # Visit a parse tree produced by calcParser#int.
     def visitInt(self, ctx:calcParser.IntContext):
-        return int(ctx.getText())
+        return self.visitChildren(ctx)
+
 
     # Visit a parse tree produced by calcParser#float.
     def visitFloat(self, ctx:calcParser.FloatContext):
-        return float(ctx.getText())
+        return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by calcParser#line_end.
     def visitLine_end(self, ctx:calcParser.Line_endContext):
-        return self.visitChildren(ctx) 
+        return self.visitChildren(ctx)
 
-def run(f):
-    input_stream = FileStream(f)
-    lexer = calcLexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = calcParser(stream)
-    tree = parser.prog()
-    print(tree.getText().strip())
-    calc = CV()
-    print(">", calc.visit(tree))
 
-if __name__ == "__main__":
-    run("tests/01_addition.txt")
-    run("tests/02_test2.txt")
+
+del calcParser

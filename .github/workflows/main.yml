@@ -22,6 +22,8 @@ jobs:
           cache: 'pip'
       - name: Install Dependencies
         run: pip install -r requirements.txt
+      - name: Update antlr4-python3-runtime
+        run: pip install -U antlr4-python3-runtime
       - name: Run parsing test
         run: |
              for f in tests/*.txt
