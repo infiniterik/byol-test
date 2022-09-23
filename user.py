@@ -32,7 +32,10 @@ class CV(calcVisitor):
 
     # Visit a parse tree produced by calcParser#addSub.
     def visitAddSub(self, ctx:calcParser.AddSubContext):
-        res = self.functions[ctx.A_OP().getText()](self.visit(ctx.expr(0)), self.visit(ctx.expr(1)))
+        left_expression = self.visit(ctx.expr(0))
+        right_expression = self.visit(ctx.expr(1))
+        print("Debugging: ")
+        res = self.functions[ctx.A_OP().getText()](left_expression, right_expression)
         return res
 
     # Visit a parse tree produced by calcParser#mulDiv.
@@ -46,9 +49,10 @@ class CV(calcVisitor):
     # Visit a parse tree produced by calcParser#int.
     def visitInt(self, ctx:calcParser.IntContext):
         return int(ctx.getText())
+
     # Visit a parse tree produced by calcParser#float.
     def visitFloat(self, ctx:calcParser.FloatContext):
-        return float(ctx.getFloat())
+        return float(ctx.getText())
 
 
     # Visit a parse tree produced by calcParser#line_end.
