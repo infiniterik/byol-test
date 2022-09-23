@@ -1,16 +1,23 @@
 grammar calc;
 
-prog : (stmt NEWLINE)* ;
-stmt : expr | assignment ;
-expr : INT OP INT
-     | num
-     | '(' expr ')'
+prog : (stmt)* # program ;
+stmt : expr line_end # expression
+     | assignment line_end # statement ;
+expr : expr op=C_OP expr # mulDiv
+     | expr op=A_OP expr # addSub
+     | '(' expr ')' # paren
+     | num # number
      ;
      
 assignment :  VARIABLE '=' expr;
      
-num  : INT ;
-NEWLINE : [\r\n]+;
+num  : INT # int
+     | FLOAT # float
+     ;
+WS : [ \t\r\n]+ -> skip;
 INT  : [0-9]+ ;
-OP   : ( '+' | '-' | '*' | '/' ) ;
+FLOAT  : [0-9]+'.'[0-9]+ ;
+A_OP : '+' | '-' ; 
+C_OP : '*' | '/' ;
 VARIABLE : [a-zA-Z_][a-zA-Z0-9_]* ;
+line_end : '\n' ;

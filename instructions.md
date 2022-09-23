@@ -116,6 +116,13 @@ statements are approariately parsed.
 The ANTLR plugin for VS-code is very useful for testing purposes. You
 may also test by repeatedly pushing to GitHub.
 
+* running antlr:
+```
+pip install antlr4-python3-runtime
+antlr4 -visitor -o build -Dlanguage=Python3 calc.g4
+```
+
 > NOTE: Everytime you use antlr to regenerate your parser, it will
 > overwrite the code in your folder. Remember to commit frequently so
 > you don't lose anything!
+
