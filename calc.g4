@@ -20,7 +20,6 @@ INT  : [0-9]+ ;
 FLOAT  : [0-9]+'.'[0-9]+ ;
 A_OP : '+' | '-' ; 
 C_OP : '*' | '/' ;
-VARIABLE : [a-zA-Z_][a-zA-Z0-9_]* ;
 line_end : '\n' ;
 
 VARIABLE : CHAR NCHAR* ;
